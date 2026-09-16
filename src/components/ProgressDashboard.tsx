@@ -7,11 +7,13 @@ interface ProgressDashboardProps {
   appData: AppData;
   currentGrade: GradeLevel;
   onStart15Min: () => void;
-  onOpenTutor: () => void;
-  onOpenSubjects: () => void;
+  onOpenTutor?: () => void;
+  onOpenSubjects?: () => void;
   onOpenDiagnostic: () => void;
   onOpenGlossary: () => void;
   villageFriendlyMode?: boolean;
+  onStartVoiceTutor?: () => void;
+  onStartCameraScan?: () => void;
 }
 
 export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
@@ -22,8 +24,12 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   onOpenSubjects,
   onOpenDiagnostic,
   onOpenGlossary,
-  villageFriendlyMode = true
+  villageFriendlyMode = true,
+  onStartVoiceTutor,
+  onStartCameraScan
 }) => {
+  const handleOpenTutor = onOpenTutor || onStartVoiceTutor || onStartCameraScan || (() => {});
+  const handleOpenSubjects = onOpenSubjects || (() => {});
   const { progress, sessions } = appData;
   const gradeSessions = sessions.filter((s) => s.subjectId.includes(`sub-${currentGrade}`) || s.subjectName);
 
@@ -205,7 +211,7 @@ Hôm nay em chỉ cần dành ra mười lăm phút tự học. Nếu gặp bài
           {/* Card 2: Hỏi Thầy Cô AI Bằng Giọng Nói Hoặc Ảnh Chụp Vở */}
           <div
             id="card-action-tutor"
-            onClick={onOpenTutor}
+            onClick={handleOpenTutor}
             className="group cursor-pointer bg-gradient-to-br from-blue-50 to-indigo-100/70 hover:from-blue-100 hover:to-indigo-200/80 border-2 border-blue-300 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div className="flex items-start gap-4">
@@ -240,7 +246,7 @@ Hôm nay em chỉ cần dành ra mười lăm phút tự học. Nếu gặp bài
           {/* Card 3: Chuyên Đề SGK Lớp 10 - 11 - 12 */}
           <div
             id="card-action-subjects"
-            onClick={onOpenSubjects}
+            onClick={handleOpenSubjects}
             className="group cursor-pointer bg-gradient-to-br from-emerald-50 to-teal-100/70 hover:from-emerald-100 hover:to-teal-200/80 border-2 border-emerald-300 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div className="flex items-start gap-4">

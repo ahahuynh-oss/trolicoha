@@ -404,5 +404,9 @@ export const INITIAL_APP_DATA: AppData = {
     fontSize: "large",
     villageFriendlyMode: true,
     autoReadAloud: true
+  },
+  userProfile: {
+    name: "Học sinh",
+    gradeLevel: 12
   }
 };

@@ -77,12 +77,19 @@ export interface AppSettings {
   autoReadAloud: boolean; // Tự động đọc câu trả lời của thầy cô AI
 }
 
+export interface UserProfile {
+  name: string;
+  gradeLevel: GradeLevel;
+  school?: string;
+}
+
 export interface AppData {
   subjects: Subject[];
   questions: Question[];
   sessions: Session[];
   progress: ProgressData;
   settings: AppSettings;
+  userProfile?: UserProfile;
 }
 
 export interface SocraticStep {

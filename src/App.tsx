@@ -71,7 +71,7 @@ export default function App() {
 
   // Current Grade Level (10, 11, 12)
   const [currentGrade, setCurrentGrade] = useState<GradeLevel>(() => {
-    return appData.userProfile.gradeLevel || 12;
+    return appData?.userProfile?.gradeLevel || 12;
   });
 
   // Navigation State
@@ -136,7 +136,7 @@ export default function App() {
     setAppData((prev) => ({
       ...prev,
       userProfile: {
-        ...prev.userProfile,
+        ...(prev.userProfile || { name: "Học sinh", gradeLevel: grade }),
         gradeLevel: grade
       }
     }));
@@ -314,8 +314,13 @@ export default function App() {
         onGradeChange={handleGradeChange}
         streakDays={appData.progress.streakDays}
         todayMinutes={appData.progress.todayMinutesSpent}
+        dailyGoalMinutes={appData.progress.dailyGoalMinutes || 15}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onOpenGlossary={() => setIsGlossaryOpen(true)}
+        onOpenDiagnostic={() => {
+          setDiagnosticMistakes([]);
+          setIsDiagnosticOpen(true);
+        }}
         onOpenGuide={() => setIsGuideOpen(true)}
         villageFriendlyMode={settings.villageFriendlyMode !== false}
         onToggleVillageMode={handleToggleVillageMode}
@@ -337,6 +342,14 @@ export default function App() {
             appData={appData}
             currentGrade={currentGrade}
             onStart15Min={handleStart15Min}
+            onOpenTutor={() => {
+              speechService.playChime("click");
+              setActiveTab("tutor");
+            }}
+            onOpenSubjects={() => {
+              speechService.playChime("click");
+              setActiveTab("subjects");
+            }}
             onOpenDiagnostic={() => {
               setDiagnosticMistakes([]);
               setIsDiagnosticOpen(true);
