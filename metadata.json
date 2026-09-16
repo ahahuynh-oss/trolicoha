@@ -1,0 +1,6 @@
+{
+  "name": "Trợ lý Tự học Toán THPT GDPT 2018",
+  "description": "Gia sư AI Toán THPT phương pháp Socratic 7 bước, nhận diện đề qua camera, đồng hành cùng học sinh mất gốc và học sinh dân tộc thiểu số.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

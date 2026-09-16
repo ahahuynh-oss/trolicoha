@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Chạy quy trình này mỗi khi có push lên nhánh main/master
+  push:
+    branches:
+      - main
+      - master
+  # Cho phép chạy thủ công từ tab Actions
+  workflow_dispatch:
+
+# Quyền cần thiết để deploy lên GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Chống việc chạy nhiều deploy cùng lúc
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+        # Nếu bạn có các biến môi trường Firebase, hãy cấu hình chúng trong Settings > Secrets and variables > Actions
+        # env:
+        #   VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Đường dẫn thư mục sau khi build (Vite mặc định là thư mục 'dist')
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
