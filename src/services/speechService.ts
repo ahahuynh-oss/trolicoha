@@ -12,6 +12,13 @@ class SpeechService {
     if (typeof window !== "undefined") {
       if ("speechSynthesis" in window) {
         this.synth = window.speechSynthesis;
+        if (this.synth.onvoiceschanged !== undefined) {
+          this.synth.onvoiceschanged = () => {
+            try {
+              this.synth?.getVoices();
+            } catch (e) {}
+          };
+        }
       }
       const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRec) {
@@ -133,13 +140,43 @@ class SpeechService {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = "vi-VN";
-    utterance.rate = rate;
+    utterance.rate = rate || 0.95; // Nhẹ nhàng, chậm rãi vừa vặn cho học sinh
+    utterance.pitch = 1.18; // Cao độ trong trẻo, tự nhiên của giọng nữ
 
-    // Pick a Vietnamese voice if available
+    // Pick a Vietnamese FEMALE voice if available
     const voices = this.synth.getVoices();
-    const viVoice = voices.find(v => v.lang.startsWith("vi"));
-    if (viVoice) {
-      utterance.voice = viVoice;
+    const viVoices = voices.filter((v) => {
+      const l = (v.lang || "").toLowerCase().replace("_", "-");
+      return l.startsWith("vi");
+    });
+
+    // Tìm kiếm các giọng nữ tiếng Việt phổ biến trên Edge, Chrome, Windows, Android, iOS:
+    // "Microsoft HoaiMy Online (Natural) - Vietnamese (Vietnam)" -> Giọng nữ chuẩn cao cấp của Microsoft
+    // "Google tiếng Việt"
+    // Các giọng có tên chứa "female", "nữ", "hoaimy", "linh", "mai", "chi", "phuong", "my"
+    let femaleVoice = viVoices.find((v) => {
+      const name = (v.name || "").toLowerCase();
+      return (
+        name.includes("hoaimy") ||
+        name.includes("female") ||
+        name.includes("nữ") ||
+        name.includes("nu") ||
+        name.includes("linh") ||
+        name.includes("mai") ||
+        name.includes("chi") ||
+        name.includes("phuong") ||
+        name.includes("my") ||
+        name.includes("google")
+      );
+    });
+
+    // Nếu không tìm thấy theo tên, ưu tiên giọng đầu tiên trong danh sách tiếng Việt
+    if (!femaleVoice && viVoices.length > 0) {
+      femaleVoice = viVoices[0];
+    }
+
+    if (femaleVoice) {
+      utterance.voice = femaleVoice;
     }
 
     utterance.onstart = () => {

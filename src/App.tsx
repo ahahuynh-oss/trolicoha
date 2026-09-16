@@ -336,7 +336,9 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-7xl mx-auto p-3 sm:p-5 lg:p-6 flex flex-col">
+      <main className={`flex-1 w-full mx-auto flex flex-col ${
+        activeTab === "tutor" ? "w-full max-w-[99%] xl:max-w-[98%] p-1 sm:p-2.5" : "max-w-7xl p-3 sm:p-5 lg:p-6"
+      }`}>
         {activeTab === "dashboard" && (
           <ProgressDashboard
             appData={appData}
