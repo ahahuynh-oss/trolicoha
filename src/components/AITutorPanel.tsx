@@ -271,64 +271,64 @@ Cô ở đây để **dẫn dắt em từng bước Socratic**, kiên nhẫn đ�
   const currentStepObj = SOCRATIC_STEPS.find((s) => s.stepNumber === currentStep) || SOCRATIC_STEPS[0];
 
   return (
-    <div className="w-full flex-1 flex flex-col h-[calc(100vh-115px)] min-h-[640px] bg-white rounded-3xl shadow-xl border-2 border-slate-200/80 overflow-hidden">
+    <div className="w-full flex-1 flex flex-col h-[calc(100vh-115px)] min-h-[500px] bg-white rounded-2xl sm:rounded-3xl shadow-xl border sm:border-2 border-slate-200/80 overflow-hidden">
       {/* Socratic Step Header Bar */}
-      <div className="bg-slate-900 text-white p-3.5 sm:px-6 border-b border-slate-800">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-slate-900 text-white px-3 py-2 sm:p-3.5 sm:px-6 border-b border-slate-800">
+        <div className="flex items-center justify-between gap-2">
           {/* Active Step Info */}
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-500 via-purple-600 to-amber-500 flex items-center justify-center text-white text-xl shadow-md">
+          <div className="flex items-center gap-2 sm:gap-3.5 min-w-0">
+            <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-rose-500 via-purple-600 to-amber-500 flex items-center justify-center text-white text-sm sm:text-xl shadow-md shrink-0">
               <i className={`fa-solid ${currentStepObj.icon}`}></i>
             </div>
-            <div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-sm font-extrabold uppercase tracking-wider text-amber-400">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2.5">
+                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-400 truncate">
                   Bước {currentStep}/7: {currentStepObj.title}
                 </span>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-200 border border-slate-700 hidden sm:inline-block font-semibold">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-200 border border-slate-700 hidden md:inline-block font-semibold">
                   {currentStepObj.subtitle}
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 line-clamp-1 max-w-2xl font-medium">
+              <p className="text-xs text-slate-300 line-clamp-1 max-w-2xl font-medium hidden sm:block">
                 {currentStepObj.description}
               </p>
             </div>
           </div>
 
           {/* Stepper Buttons & Controls */}
-          <div className="flex items-center gap-2.5 self-end md:self-auto">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* Simple dialect toggle */}
             <button
               onClick={() => onToggleDialect(!useSimpleDialect)}
               title="Chuyển chế độ giải thích đơn giản hóa / ví dụ nương rẫy đời sống"
-              className={`px-3 py-1.5 text-xs sm:text-sm font-bold rounded-xl border transition-all flex items-center gap-1.5 shadow-2xs ${
+              className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-bold rounded-lg sm:rounded-xl border transition-all flex items-center gap-1 shadow-2xs ${
                 useSimpleDialect
                   ? "bg-amber-500/25 text-amber-300 border-amber-500/60 ring-1 ring-amber-400/40"
                   : "bg-slate-800 text-slate-400 border-slate-700 hover:text-white"
               }`}
             >
-              <i className="fa-solid fa-mountain-sun text-amber-400"></i>
+              <i className="fa-solid fa-mountain-sun text-amber-400 text-xs"></i>
               <span className="hidden sm:inline">Ví dụ gần gũi vùng cao</span>
-              <span className="sm:hidden">Dân dã</span>
+              <span className="sm:hidden text-[11px]">Dân dã</span>
             </button>
 
             {/* Step navigation */}
-            <div className="flex items-center bg-slate-800 rounded-xl p-1 border border-slate-700 shadow-inner">
+            <div className="flex items-center bg-slate-800 rounded-lg sm:rounded-xl p-0.5 sm:p-1 border border-slate-700 shadow-inner">
               <button
                 disabled={currentStep <= 1}
                 onClick={() => setCurrentStep((prev) => Math.max(1, prev - 1))}
-                className="px-2.5 py-1 text-xs sm:text-sm text-slate-300 hover:text-white disabled:opacity-30 rounded-lg hover:bg-slate-700 transition-colors"
+                className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-xs sm:text-sm text-slate-300 hover:text-white disabled:opacity-30 rounded hover:bg-slate-700 transition-colors"
                 title="Lùi lại 1 bước"
               >
                 <i className="fa-solid fa-chevron-left"></i>
               </button>
-              <span className="px-3 text-xs sm:text-sm font-mono text-amber-300 font-extrabold">
+              <span className="px-1.5 sm:px-3 text-xs sm:text-sm font-mono text-amber-300 font-extrabold">
                 {currentStep}/7
               </span>
               <button
                 disabled={currentStep >= 7}
                 onClick={() => setCurrentStep((prev) => Math.min(7, prev + 1))}
-                className="px-2.5 py-1 text-xs sm:text-sm text-slate-300 hover:text-white disabled:opacity-30 rounded-lg hover:bg-slate-700 transition-colors"
+                className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-xs sm:text-sm text-slate-300 hover:text-white disabled:opacity-30 rounded hover:bg-slate-700 transition-colors"
                 title="Sang bước tiếp theo"
               >
                 <i className="fa-solid fa-chevron-right"></i>
@@ -339,9 +339,9 @@ Cô ở đây để **dẫn dắt em từng bước Socratic**, kiên nhẫn đ�
             <button
               onClick={handleResetChat}
               title="Bắt đầu bài toán mới"
-              className="p-2 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors border border-slate-700 shadow-xs"
+              className="p-1.5 sm:p-2 sm:px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors border border-slate-700 shadow-xs"
             >
-              <i className="fa-solid fa-rotate-right"></i>
+              <i className="fa-solid fa-rotate-right text-xs"></i>
               <span className="hidden sm:inline">Bài mới</span>
             </button>
           </div>
@@ -490,73 +490,75 @@ Cô ở đây để **dẫn dắt em từng bước Socratic**, kiên nhẫn đ�
       </div>
 
       {/* Socratic Quick Action Prompt Chips - Ethnic Learner Oriented */}
-      <div className="px-3 sm:px-5 py-2.5 bg-amber-50/90 border-t-2 border-amber-200/80 overflow-x-auto flex items-center gap-2.5 scrollbar-none">
+      <div className="px-2 sm:px-5 py-1.5 sm:py-2.5 bg-amber-50/90 border-t sm:border-t-2 border-amber-200/80 overflow-x-auto flex items-center gap-1.5 sm:gap-2.5 scrollbar-none">
         <span className="text-xs sm:text-sm font-extrabold text-amber-950 whitespace-nowrap hidden sm:inline">
           🌾 Hỏi nhanh cô:
         </span>
         <button
           onClick={() => handleSendMessage("Cô giáo giải thích bằng ví dụ nương rẫy hoặc đời sống bản làng cho em dễ hiểu với ạ!")}
-          className="px-3.5 sm:px-4 py-2 bg-white hover:bg-amber-100 border-2 border-amber-300 text-amber-950 text-xs sm:text-sm font-bold rounded-2xl whitespace-nowrap shadow-xs transition-colors flex items-center gap-2"
+          className="px-2.5 sm:px-4 py-1 sm:py-2 bg-white hover:bg-amber-100 border border-amber-300 text-amber-950 text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl whitespace-nowrap shadow-2xs transition-colors flex items-center gap-1.5"
         >
-          <span>🌾</span> Cho ví dụ nương rẫy bản làng
+          <span>🌾</span> <span>Ví dụ nương rẫy</span>
         </button>
         <button
           onClick={() => handleSendMessage("Bài này bước 1 cần làm gì trước ạ? Cô chỉ manh mối đầu tiên giúp em với!")}
-          className="px-3.5 sm:px-4 py-2 bg-white hover:bg-blue-100 border-2 border-blue-300 text-blue-950 text-xs sm:text-sm font-bold rounded-2xl whitespace-nowrap shadow-xs transition-colors flex items-center gap-2"
+          className="px-2.5 sm:px-4 py-1 sm:py-2 bg-white hover:bg-blue-100 border border-blue-300 text-blue-950 text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl whitespace-nowrap shadow-2xs transition-colors flex items-center gap-1.5"
         >
-          <span>🪜</span> Bước 1 làm gì trước ạ?
+          <span>🪜</span> <span>Bước 1 làm gì?</span>
         </button>
         <button
           onClick={() => handleSendMessage("Em bị mất gốc kiến thức phần này từ lớp dưới, cô nhắc lại thật chậm từ đầu giúp em nhé!")}
-          className="px-3.5 sm:px-4 py-2 bg-white hover:bg-rose-100 border-2 border-rose-300 text-rose-950 text-xs sm:text-sm font-bold rounded-2xl whitespace-nowrap shadow-xs transition-colors flex items-center gap-2"
+          className="px-2.5 sm:px-4 py-1 sm:py-2 bg-white hover:bg-rose-100 border border-rose-300 text-rose-950 text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl whitespace-nowrap shadow-2xs transition-colors flex items-center gap-1.5"
         >
-          <span>🐢</span> Em mất gốc, cô giảng thật chậm giúp em
+          <span>🐢</span> <span>Em mất gốc, cô giảng chậm</span>
         </button>
         <button
           onClick={() => handleSendMessage("Em đã hiểu bước này rồi, cô cho em sang bước tiếp theo với ạ!")}
-          className="px-3.5 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-2xl whitespace-nowrap shadow-md transition-colors flex items-center gap-2"
+          className="px-2.5 sm:px-4 py-1 sm:py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl whitespace-nowrap shadow-2xs transition-colors flex items-center gap-1.5"
         >
-          <span>⏩</span> Sang bước {Math.min(7, currentStep + 1)}/7
+          <span>⏩</span> <span>Sang bước {Math.min(7, currentStep + 1)}/7</span>
         </button>
       </div>
 
-      {/* Accessible Big Voice & Camera Touch Bar */}
-      <div className="p-3 sm:p-5 bg-gradient-to-b from-white to-slate-50 border-t-2 border-slate-200 space-y-3.5 shadow-lg">
-        {/* Big Buttons Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {/* Big Voice Button */}
+      {/* Accessible Big Voice & Camera Touch Bar - Compact on Mobile */}
+      <div className="p-2 sm:p-5 bg-gradient-to-b from-white to-slate-50 border-t sm:border-t-2 border-slate-200 space-y-2 sm:space-y-3.5 shadow-lg">
+        {/* Buttons Row: 2 columns on both mobile & desktop */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-4">
+          {/* Voice Button */}
           <button
             type="button"
             id="btn-voice-input-big"
             onClick={toggleVoiceRecording}
-            className={`py-4 sm:py-5 px-6 rounded-2xl font-black text-base sm:text-xl flex items-center justify-center gap-3 shadow-lg transition-all active:scale-98 ${
+            className={`py-2 sm:py-5 px-2.5 sm:px-6 rounded-xl sm:rounded-2xl font-bold sm:font-black text-xs sm:text-xl flex items-center justify-center gap-1.5 sm:gap-3 shadow-sm sm:shadow-lg transition-all active:scale-98 ${
               isListening
-                ? "bg-rose-600 text-white animate-pulse ring-4 ring-rose-300"
+                ? "bg-rose-600 text-white animate-pulse ring-2 sm:ring-4 ring-rose-300"
                 : "bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 text-white hover:brightness-105"
             }`}
           >
-            <span className="text-2xl sm:text-3xl">{isListening ? "🔴" : "🎙️"}</span>
-            <span>
+            <span className="text-base sm:text-3xl">{isListening ? "🔴" : "🎙️"}</span>
+            <span className="truncate">
               {isListening
-                ? "Đang lắng nghe em nói... (Bấm để gửi)"
-                : "Bấm vào đây để nói (Không cần gõ phím)"}
+                ? "Đang nghe... (Bấm gửi)"
+                : "Bấm để nói"}
             </span>
+            <span className="hidden sm:inline"> (Không cần gõ phím)</span>
           </button>
 
-          {/* Big Camera Button */}
+          {/* Camera Button */}
           <button
             type="button"
             id="btn-trigger-camera-big"
             onClick={() => setShowCameraModal(true)}
-            className="py-4 sm:py-5 px-6 rounded-2xl font-black text-base sm:text-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:brightness-105 text-white flex items-center justify-center gap-3 shadow-lg transition-all active:scale-98"
+            className="py-2 sm:py-5 px-2.5 sm:px-6 rounded-xl sm:rounded-2xl font-bold sm:font-black text-xs sm:text-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:brightness-105 text-white flex items-center justify-center gap-1.5 sm:gap-3 shadow-sm sm:shadow-lg transition-all active:scale-98"
           >
-            <span className="text-2xl sm:text-3xl">📸</span>
-            <span>Chụp ảnh trang vở / sách bài tập</span>
+            <span className="text-base sm:text-3xl">📸</span>
+            <span className="truncate">Chụp ảnh bài tập</span>
+            <span className="hidden sm:inline"> / sách vở</span>
           </button>
         </div>
 
         {/* Text Input Row and Controls */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative flex-1">
             <input
               type="text"
@@ -571,29 +573,29 @@ Cô ở đây để **dẫn dắt em từng bước Socratic**, kiên nhẫn đ�
               }}
               placeholder={
                 isListening
-                  ? "Đang lắng nghe giọng nói của em..."
-                  : "Hoặc gõ câu hỏi / câu trả lời vào đây rồi bấm Gửi..."
+                  ? "Đang lắng nghe..."
+                  : "Nhập câu hỏi hoặc câu trả lời..."
               }
-              className={`w-full py-3 sm:py-4 pl-4 pr-12 text-base sm:text-lg bg-white border-2 rounded-2xl focus:outline-none transition-all shadow-inner ${
+              className={`w-full py-2 sm:py-3.5 pl-3 sm:pl-4 pr-3 sm:pr-4 text-xs sm:text-lg bg-white border sm:border-2 rounded-xl sm:rounded-2xl focus:outline-none transition-all shadow-inner ${
                 isListening
-                  ? "border-rose-400 ring-4 ring-rose-200 text-rose-900"
-                  : "border-slate-300 focus:border-amber-500 focus:ring-4 focus:ring-amber-200/50"
+                  ? "border-rose-400 ring-2 sm:ring-4 ring-rose-200 text-rose-900"
+                  : "border-slate-300 focus:border-amber-500 focus:ring-2 sm:ring-4 focus:ring-amber-200/50"
               }`}
             />
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Auto Read Aloud Toggle */}
-            <label className="flex items-center gap-2.5 cursor-pointer bg-white px-4 py-3 sm:py-3.5 rounded-2xl border-2 border-slate-200 text-sm sm:text-base font-bold text-slate-700 hover:bg-slate-100 select-none shadow-xs">
+            <label className="flex items-center gap-1 sm:gap-2.5 cursor-pointer bg-white px-2.5 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl border sm:border-2 border-slate-200 text-xs sm:text-base font-bold text-slate-700 hover:bg-slate-100 select-none shadow-2xs">
               <input
                 type="checkbox"
                 checked={autoRead}
                 onChange={(e) => setAutoRead(e.target.checked)}
-                className="w-5 h-5 text-rose-600 rounded focus:ring-rose-400"
+                className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-rose-600 rounded focus:ring-rose-400"
               />
-              <span className="flex items-center gap-1.5">
-                <span>🔊</span>
-                <span>Cô tự động đọc</span>
+              <span className="flex items-center gap-1">
+                <span className="text-xs sm:text-base">🔊</span>
+                <span className="hidden sm:inline">Cô đọc</span>
               </span>
             </label>
 
@@ -603,10 +605,10 @@ Cô ở đây để **dẫn dắt em từng bước Socratic**, kiên nhẫn đ�
               id="btn-send-socratic-msg"
               disabled={isLoading || !inputText.trim()}
               onClick={() => handleSendMessage()}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:opacity-40 text-slate-950 font-black rounded-2xl text-base sm:text-lg shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0"
+              className="px-3.5 sm:px-8 py-2 sm:py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:opacity-40 text-slate-950 font-black rounded-xl sm:rounded-2xl text-xs sm:text-lg shadow-sm sm:shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5 shrink-0"
             >
               <span>Gửi</span>
-              <i className="fa-solid fa-paper-plane text-sm"></i>
+              <i className="fa-solid fa-paper-plane text-xs sm:text-sm"></i>
             </button>
           </div>
         </div>

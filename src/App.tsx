@@ -448,12 +448,12 @@ export default function App() {
         )}
       </main>
 
-      {/* Persistent Bottom Mobile Bar for fast switching */}
-      <nav className="sm:hidden sticky bottom-0 z-40 bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-around shadow-lg">
+      {/* Persistent Bottom Mobile Bar for fast switching - 4 Essential Items */}
+      <nav className="sm:hidden sticky bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-1.5 flex items-center justify-around shadow-lg">
         <button
           onClick={() => setActiveTab("dashboard")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "dashboard" ? "text-blue-600" : "text-slate-500"
+          className={`flex flex-col items-center gap-0.5 text-[11px] font-bold ${
+            activeTab === "dashboard" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
           }`}
         >
           <i className="fa-solid fa-chart-pie text-base"></i>
@@ -462,20 +462,20 @@ export default function App() {
 
         <button
           onClick={() => setActiveTab("tutor")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "tutor" ? "text-blue-600" : "text-slate-500"
+          className={`flex flex-col items-center gap-0.5 text-[11px] font-bold ${
+            activeTab === "tutor" ? "text-rose-600" : "text-slate-500 hover:text-slate-700"
           }`}
         >
-          <div className="w-8 h-8 -mt-4 rounded-full bg-gradient-to-r from-blue-600 to-amber-500 text-white flex items-center justify-center shadow-md">
-            <i className="fa-solid fa-brain text-sm"></i>
+          <div className="w-9 h-9 -mt-4 rounded-full bg-gradient-to-r from-rose-500 via-purple-600 to-amber-500 text-white flex items-center justify-center shadow-md">
+            <i className="fa-solid fa-chalkboard-user text-sm"></i>
           </div>
           <span>Gia sư AI</span>
         </button>
 
         <button
           onClick={() => setActiveTab("daily15")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "daily15" ? "text-blue-600" : "text-slate-500"
+          className={`flex flex-col items-center gap-0.5 text-[11px] font-bold ${
+            activeTab === "daily15" ? "text-amber-600" : "text-slate-500 hover:text-slate-700"
           }`}
         >
           <i className="fa-solid fa-stopwatch text-base"></i>
@@ -484,32 +484,12 @@ export default function App() {
 
         <button
           onClick={() => setActiveTab("subjects")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "subjects" || activeTab === "quiz" ? "text-blue-600" : "text-slate-500"
+          className={`flex flex-col items-center gap-0.5 text-[11px] font-bold ${
+            activeTab === "subjects" || activeTab === "quiz" ? "text-emerald-600" : "text-slate-500 hover:text-slate-700"
           }`}
         >
           <i className="fa-solid fa-layer-group text-base"></i>
           <span>Chuyên đề</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("math-lab")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "math-lab" ? "text-blue-600" : "text-slate-500"
-          }`}
-        >
-          <i className="fa-solid fa-flask text-base"></i>
-          <span>Thí nghiệm</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab("game")}
-          className={`flex flex-col items-center gap-1 text-[11px] font-semibold ${
-            activeTab === "game" ? "text-amber-600" : "text-slate-500"
-          }`}
-        >
-          <i className={`text-base fa-solid fa-gamepad ${activeTab === "game" ? "animate-bounce" : ""}`}></i>
-          <span>Game</span>
         </button>
       </nav>
 

@@ -52,16 +52,13 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-200/60 shadow-xs">
       {/* Top village friendly banner if active */}
       {villageFriendlyMode && (
-        <div className="bg-gradient-to-r from-amber-600 via-amber-500 to-emerald-600 text-white px-3 py-1 text-xs font-semibold flex items-center justify-between shadow-inner">
+        <div className="hidden md:flex bg-gradient-to-r from-amber-600 via-amber-500 to-emerald-600 text-white px-3 py-1 text-xs font-semibold items-center justify-between shadow-inner">
           <div className="flex items-center gap-2 max-w-7xl mx-auto w-full">
             <span className="bg-white/20 px-2 py-0.5 rounded-full text-[11px] font-bold flex items-center gap-1">
               🌾 BẢN LÀNG DỄ DÙNG
             </span>
-            <span className="hidden sm:inline">
+            <span>
               Chế độ trợ năng đặc biệt: Nút bấm to bản, giọng đọc tiếng Việt 1 chạm, ví dụ nương rẫy mộc mạc!
-            </span>
-            <span className="sm:hidden text-[11px]">
-              Nút bấm to, giọng đọc 1 chạm, ví dụ nương rẫy dễ hiểu!
             </span>
           </div>
         </div>
@@ -120,15 +117,15 @@ export const Header: React.FC<HeaderProps> = ({
               id="btn-toggle-village-mode"
               onClick={onToggleVillageMode}
               title={villageFriendlyMode ? "Đang bật chế độ Bản Làng Dễ Dùng" : "Bật chế độ Bản Làng Dễ Dùng"}
-              className={`px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-xl border transition-all flex items-center gap-1.5 shadow-2xs ${
+              className={`hidden md:flex px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-xl border transition-all items-center gap-1.5 shadow-2xs ${
                 villageFriendlyMode
                   ? "bg-amber-500 text-white border-amber-600 ring-2 ring-amber-300"
                   : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-amber-50"
               }`}
             >
               <span>🌾</span>
-              <span className="hidden sm:inline">
-                {villageFriendlyMode ? "Bản Làng (Đang bật)" : "Chế độ Bản Làng"}
+              <span>
+                {villageFriendlyMode ? "Bản Làng (Bật)" : "Bản Làng"}
               </span>
             </button>
 
@@ -137,13 +134,10 @@ export const Header: React.FC<HeaderProps> = ({
               id="btn-cycle-font-size"
               onClick={onCycleFontSize}
               title="Đổi cỡ chữ to hơn để dễ đọc"
-              className="px-2 sm:px-2.5 py-1.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl border border-slate-200 transition-all flex items-center gap-1"
+              className="hidden md:flex px-2 sm:px-2.5 py-1.5 text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl border border-slate-200 transition-all items-center gap-1"
             >
               <i className="fa-solid fa-font text-xs"></i>
-              <span className="hidden lg:inline">{getFontSizeLabel()}</span>
-              <span className="lg:hidden font-mono font-bold">
-                {fontSize === "xlarge" ? "A++" : fontSize === "large" ? "A+" : "A"}
-              </span>
+              <span>{getFontSizeLabel()}</span>
             </button>
 
             {/* Streak Counter */}
@@ -160,10 +154,10 @@ export const Header: React.FC<HeaderProps> = ({
               id="btn-open-game-tab"
               onClick={() => onTabChange("game")}
               title="Mini game Toán học"
-              className="p-2 sm:px-2.5 text-slate-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-colors text-xs font-semibold flex items-center gap-1"
+              className="hidden lg:flex p-2 sm:px-2.5 text-slate-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-colors text-xs font-semibold items-center gap-1"
             >
               <i className="fa-solid fa-gamepad text-amber-600 text-sm"></i>
-              <span className="hidden md:inline">Giải trí</span>
+              <span>Giải trí</span>
             </button>
 
             {/* Socratic Guide Button */}
@@ -171,10 +165,10 @@ export const Header: React.FC<HeaderProps> = ({
               id="btn-open-guide-modal"
               onClick={onOpenGuide}
               title="Tìm hiểu phương pháp học Socratic 7 bước"
-              className="p-2 sm:px-2.5 text-slate-600 hover:text-blue-700 hover:bg-blue-50 rounded-xl transition-colors text-xs font-semibold flex items-center gap-1"
+              className="hidden lg:flex p-2 sm:px-2.5 text-slate-600 hover:text-blue-700 hover:bg-blue-50 rounded-xl transition-colors text-xs font-semibold items-center gap-1"
             >
               <i className="fa-solid fa-brain text-blue-600 text-sm"></i>
-              <span className="hidden md:inline">7 bước Socratic</span>
+              <span>7 bước Socratic</span>
             </button>
 
             {/* Auth Button */}
@@ -192,10 +186,10 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <button
                 onClick={onLogin}
-                className="w-9 h-9 sm:w-auto sm:px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl border border-blue-700 transition-all flex items-center justify-center gap-1 shadow-sm"
+                className="hidden sm:flex w-9 h-9 sm:w-auto sm:px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl border border-blue-700 transition-all items-center justify-center gap-1 shadow-sm"
               >
                 <i className="fa-brands fa-google"></i>
-                <span className="hidden sm:inline">Đăng nhập</span>
+                <span>Đăng nhập</span>
               </button>
             )}
 
@@ -204,7 +198,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="btn-header-settings"
               onClick={onOpenSettings}
               title="Cài đặt âm thanh, cỡ chữ và API Key"
-              className="w-9 h-9 sm:w-auto sm:px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1"
+              className="px-3 py-1.5 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1.5 shadow-2xs"
             >
               <i className="fa-solid fa-gear text-slate-600"></i>
               <span className="hidden sm:inline">Cài đặt</span>
@@ -212,8 +206,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Primary Navigation Row - Large, High-Contrast Touch Targets */}
-        <div className="flex items-center justify-between border-t border-slate-100 py-2 overflow-x-auto gap-1 sm:gap-2 scrollbar-none">
+        {/* Primary Navigation Row - Large, High-Contrast Touch Targets (Desktop only, Mobile uses Bottom Nav) */}
+        <div className="hidden md:flex items-center justify-between border-t border-slate-100 py-2 overflow-x-auto gap-1 sm:gap-2 scrollbar-none">
           <div className="flex items-center gap-1 sm:gap-2 w-full">
             {/* Tab 1: Trang chủ Bản Làng */}
             <button
